@@ -22,22 +22,18 @@ paths:
           description: Una lista de todos los elementos de contenido
           content:
             application/json:
-              example: |
-                [
-                  {
-                    "id": 1,
-                    "title": "Contenido de ejemplo",
-                    "description": "Descripción del contenido de ejemplo",
-                    "release_date": "2024-05-19T12:00:00Z",
-                    "type": "video",
-                    "url_content": "http://example.com/content/1",
-                    "url_cover": "http://example.com/cover/1"
-                  }
-                ]
               schema:
                 type: array
                 items:
                   $ref: '#/definitions/Content'
+              example:
+                - id: 1
+                  title: "Contenido de ejemplo"
+                  description: "Descripción del contenido de ejemplo"
+                  release_date: "2024-05-19T12:00:00Z"
+                  type: "video"
+                  url_content: "http://example.com/content/1"
+                  url_cover: "http://example.com/cover/1"
     post:
       summary: Create a new content item
       description: Crea un nuevo elemento de contenido proporcionando los detalles necesarios en el cuerpo de la solicitud.
@@ -54,16 +50,16 @@ paths:
           description: Contenido creado exitosamente
           content:
             application/json:
-              example: |
-                {
-                  "id": 1,
-                  "title": "Nuevo contenido",
-                  "description": "Descripción del nuevo contenido",
-                  "release_date": "2024-05-19T12:00:00Z",
-                  "type": "video",
-                  "url_content": "http://example.com/content/1",
-                  "url_cover": "http://example.com/cover/1"
-                }
+              schema:
+                $ref: '#/definitions/Content'
+              example:
+                id: 1
+                title: "Nuevo contenido"
+                description: "Descripción del nuevo contenido"
+                release_date: "2024-05-19T12:00:00Z"
+                type: "video"
+                url_content: "http://example.com/content/1"
+                url_cover: "http://example.com/cover/1"
 
   /content/{id}:
     get:
@@ -83,18 +79,16 @@ paths:
           description: Detalles del contenido recuperado
           content:
             application/json:
-              example: |
-                {
-                  "id": 1,
-                  "title": "Contenido de ejemplo",
-                  "description": "Descripción del contenido de ejemplo",
-                  "release_date": "2024-05-19T12:00:00Z",
-                  "type": "video",
-                  "url_content": "http://example.com/content/1",
-                  "url_cover": "http://example.com/cover/1"
-                }
               schema:
                 $ref: '#/definitions/Content'
+              example:
+                id: 1
+                title: "Contenido de ejemplo"
+                description: "Descripción del contenido de ejemplo"
+                release_date: "2024-05-19T12:00:00Z"
+                type: "video"
+                url_content: "http://example.com/content/1"
+                url_cover: "http://example.com/cover/1"
         404:
           description: Contenido no encontrado
     put:
@@ -120,16 +114,16 @@ paths:
           description: Contenido actualizado exitosamente
           content:
             application/json:
-              example: |
-                {
-                  "id": 1,
-                  "title": "Contenido actualizado",
-                  "description": "Descripción actualizada del contenido",
-                  "release_date": "2024-05-19T12:00:00Z",
-                  "type": "video",
-                  "url_content": "http://example.com/content/1",
-                  "url_cover": "http://example.com/cover/1"
-                }
+              schema:
+                $ref: '#/definitions/Content'
+              example:
+                id: 1
+                title: "Contenido actualizado"
+                description: "Descripción actualizada del contenido"
+                release_date: "2024-05-19T12:00:00Z"
+                type: "video"
+                url_content: "http://example.com/content/1"
+                url_cover: "http://example.com/cover/1"
     delete:
       summary: Delete a content item
       description: Elimina un elemento de contenido existente usando su ID único.
@@ -157,19 +151,15 @@ paths:
           description: Una lista de todos los usuarios
           content:
             application/json:
-              example: |
-                [
-                  {
-                    "id": 1,
-                    "username": "usuario1",
-                    "email": "usuario1@example.com",
-                    "created_at": "2024-05-19T12:00:00Z"
-                  }
-                ]
               schema:
                 type: array
                 items:
                   $ref: '#/definitions/User'
+              example:
+                - id: 1
+                  username: "usuario1"
+                  email: "usuario1@example.com"
+                  created_at: "2024-05-19T12:00:00Z"
     post:
       summary: Create a new user
       description: Crea un nuevo usuario proporcionando los detalles necesarios en el cuerpo de la solicitud.
@@ -186,13 +176,13 @@ paths:
           description: Usuario creado exitosamente
           content:
             application/json:
-              example: |
-                {
-                  "id": 1,
-                  "username": "usuario1",
-                  "email": "usuario1@example.com",
-                  "created_at": "2024-05-19T12:00:00Z"
-                }
+              schema:
+                $ref: '#/definitions/User'
+              example:
+                id: 1
+                username: "usuario1"
+                email: "usuario1@example.com"
+                created_at: "2024-05-19T12:00:00Z"
 
   /users/{email}:
     get:
@@ -212,15 +202,13 @@ paths:
           description: Detalles del usuario recuperado
           content:
             application/json:
-              example: |
-                {
-                  "id": 1,
-                  "username": "usuario1",
-                  "email": "usuario1@example.com",
-                  "created_at": "2024-05-19T12:00:00Z"
-                }
               schema:
                 $ref: '#/definitions/User'
+              example:
+                id: 1
+                username: "usuario1"
+                email: "usuario1@example.com"
+                created_at: "2024-05-19T12:00:00Z"
         404:
           description: Usuario no encontrado
     put:
@@ -246,13 +234,13 @@ paths:
           description: Usuario actualizado exitosamente
           content:
             application/json:
-              example: |
-                {
-                  "id": 1,
-                  "username": "usuario1",
-                  "email": "usuario1@example.com",
-                  "created_at": "2024-05-19T12:00:00Z"
-                }
+              schema:
+                $ref: '#/definitions/User'
+              example:
+                id: 1
+                username: "usuario1"
+                email: "usuario1@example.com"
+                created_at: "2024-05-19T12:00:00Z"
     delete:
       summary: Delete a user
       description: Elimina un usuario existente usando su correo electrónico único.
@@ -280,21 +268,17 @@ paths:
           description: Una lista de todas las suscripciones
           content:
             application/json:
-              example: |
-                [
-                  {
-                    "id": 1,
-                    "subscriber_id": 1,
-                    "subscribed_to_id": 2,
-                    "start_date": "2024-05-19T12:00:00Z",
-                    "end_date": "2025-05-19T12:00:00Z",
-                    "status": "active"
-                  }
-                ]
               schema:
                 type: array
                 items:
                   $ref: '#/definitions/Subscription'
+              example:
+                - id: 1
+                  subscriber_id: 1
+                  subscribed_to_id: 2
+                  start_date: "2024-05-19T12:00:00Z"
+                  end_date: "2025-05-19T12:00:00Z"
+                  status: "active"
     post:
       summary: Create a new subscription
       description: Crea una nueva suscripción proporcionando los detalles necesarios en el cuerpo de la solicitud.
@@ -311,15 +295,15 @@ paths:
           description: Suscripción creada exitosamente
           content:
             application/json:
-              example: |
-                {
-                  "id": 1,
-                  "subscriber_id": 1,
-                  "subscribed_to_id": 2,
-                  "start_date": "2024-05-19T12:00:00Z",
-                  "end_date": "2025-05-19T12:00:00Z",
-                  "status": "active"
-                }
+              schema:
+                $ref: '#/definitions/Subscription'
+              example:
+                id: 1
+                subscriber_id: 1
+                subscribed_to_id: 2
+                start_date: "2024-05-19T12:00:00Z"
+                end_date: "2025-05-19T12:00:00Z"
+                status: "active"
 
   /subscriptions/{id}:
     get:
@@ -339,17 +323,15 @@ paths:
           description: Detalles de la suscripción recuperada
           content:
             application/json:
-              example: |
-                {
-                  "id": 1,
-                  "subscriber_id": 1,
-                  "subscribed_to_id": 2,
-                  "start_date": "2024-05-19T12:00:00Z",
-                  "end_date": "2025-05-19T12:00:00Z",
-                  "status": "active"
-                }
               schema:
                 $ref: '#/definitions/Subscription'
+              example:
+                id: 1
+                subscriber_id: 1
+                subscribed_to_id: 2
+                start_date: "2024-05-19T12:00:00Z"
+                end_date: "2025-05-19T12:00:00Z"
+                status: "active"
         404:
           description: Suscripción no encontrada
     put:
@@ -375,15 +357,15 @@ paths:
           description: Suscripción actualizada exitosamente
           content:
             application/json:
-              example: |
-                {
-                  "id": 1,
-                  "subscriber_id": 1,
-                  "subscribed_to_id": 2,
-                  "start_date": "2024-05-19T12:00:00Z",
-                  "end_date": "2025-05-19T12:00:00Z",
-                  "status": "active"
-                }
+              schema:
+                $ref: '#/definitions/Subscription'
+              example:
+                id: 1
+                subscriber_id: 1
+                subscribed_to_id: 2
+                start_date: "2024-05-19T12:00:00Z"
+                end_date: "2025-05-19T12:00:00Z"
+                status: "active"
     delete:
       summary: Delete a subscription
       description: Elimina una suscripción existente usando su ID único.
@@ -411,20 +393,16 @@ paths:
           description: Una lista de todas las interacciones
           content:
             application/json:
-              example: |
-                [
-                  {
-                    "id": 1,
-                    "user_id": 1,
-                    "content_id": 1,
-                    "type": "view",
-                    "timestamp": "2024-05-19T12:00:00Z"
-                  }
-                ]
               schema:
                 type: array
                 items:
                   $ref: '#/definitions/Interaction'
+              example:
+                - id: 1
+                  user_id: 1
+                  content_id: 1
+                  type: "view"
+                  timestamp: "2024-05-19T12:00:00Z"
     post:
       summary: Log a new interaction
       description: Registra una nueva interacción proporcionando los detalles necesarios en el cuerpo de la solicitud.
@@ -441,14 +419,14 @@ paths:
           description: Interacción registrada exitosamente
           content:
             application/json:
-              example: |
-                {
-                  "id": 1,
-                  "user_id": 1,
-                  "content_id": 1,
-                  "type": "view",
-                  "timestamp": "2024-05-19T12:00:00Z"
-                }
+              schema:
+                $ref: '#/definitions/Interaction'
+              example:
+                id: 1
+                user_id: 1
+                content_id: 1
+                type: "view"
+                timestamp: "2024-05-19T12:00:00Z"
 
   /interactions/{id}:
     get:
@@ -468,16 +446,14 @@ paths:
           description: Detalles de la interacción recuperada
           content:
             application/json:
-              example: |
-                {
-                  "id": 1,
-                  "user_id": 1,
-                  "content_id": 1,
-                  "type": "view",
-                  "timestamp": "2024-05-19T12:00:00Z"
-                }
               schema:
                 $ref: '#/definitions/Interaction'
+              example:
+                id: 1
+                user_id: 1
+                content_id: 1
+                type: "view"
+                timestamp: "2024-05-19T12:00:00Z"
         404:
           description: Interacción no encontrada
     delete:
@@ -507,21 +483,17 @@ paths:
           description: Una lista de todos los perfiles
           content:
             application/json:
-              example: |
-                [
-                  {
-                    "id": 1,
-                    "user_id": 1,
-                    "biography": "Biografía de ejemplo",
-                    "interests": ["películas", "música"],
-                    "experience": "Experiencia de ejemplo",
-                    "education": "Educación de ejemplo"
-                  }
-                ]
               schema:
                 type: array
                 items:
                   $ref: '#/definitions/Profile'
+              example:
+                - id: 1
+                  user_id: 1
+                  biography: "Biografía de ejemplo"
+                  interests: ["películas", "música"]
+                  experience: "Experiencia de ejemplo"
+                  education: "Educación de ejemplo"
     post:
       summary: Create a new profile
       description: Crea un nuevo perfil proporcionando los detalles necesarios en el cuerpo de la solicitud.
@@ -538,15 +510,15 @@ paths:
           description: Perfil creado exitosamente
           content:
             application/json:
-              example: |
-                {
-                  "id": 1,
-                  "user_id": 1,
-                  "biography": "Biografía de ejemplo",
-                  "interests": ["películas", "música"],
-                  "experience": "Experiencia de ejemplo",
-                  "education": "Educación de ejemplo"
-                }
+              schema:
+                $ref: '#/definitions/Profile'
+              example:
+                id: 1
+                user_id: 1
+                biography: "Biografía de ejemplo"
+                interests: ["películas", "música"]
+                experience: "Experiencia de ejemplo"
+                education: "Educación de ejemplo"
 
   /profiles/{id}:
     get:
@@ -566,17 +538,15 @@ paths:
           description: Detalles del perfil recuperado
           content:
             application/json:
-              example: |
-                {
-                  "id": 1,
-                  "user_id": 1,
-                  "biography": "Biografía de ejemplo",
-                  "interests": ["películas", "música"],
-                  "experience": "Experiencia de ejemplo",
-                  "education": "Educación de ejemplo"
-                }
               schema:
                 $ref: '#/definitions/Profile'
+              example:
+                id: 1
+                user_id: 1
+                biography: "Biografía de ejemplo"
+                interests: ["películas", "música"]
+                experience: "Experiencia de ejemplo"
+                education: "Educación de ejemplo"
         404:
           description: Perfil no encontrado
     put:
@@ -602,15 +572,15 @@ paths:
           description: Perfil actualizado exitosamente
           content:
             application/json:
-              example: |
-                {
-                  "id": 1,
-                  "user_id": 1,
-                  "biography": "Biografía de ejemplo",
-                  "interests": ["películas", "música"],
-                  "experience": "Experiencia de ejemplo",
-                  "education": "Educación de ejemplo"
-                }
+              schema:
+                $ref: '#/definitions/Profile'
+              example:
+                id: 1
+                user_id: 1
+                biography: "Biografía de ejemplo"
+                interests: ["películas", "música"]
+                experience: "Experiencia de ejemplo"
+                education: "Educación de ejemplo"
     delete:
       summary: Delete a profile
       description: Elimina un perfil existente usando su ID único.
