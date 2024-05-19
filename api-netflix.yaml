@@ -2,9 +2,11 @@ swagger: '2.0'
 info:
   title: Multi-Service API Documentation
   version: 1.0.0
-  description: API documentation for multiple microservices including User, Content, and other services.
+  description: >
+    Bienvenido a la documentación de la API Multi-Service. Esta API incluye varios microservicios que gestionan diferentes aspectos de nuestra plataforma, incluyendo usuarios, perfiles, contenido, suscripciones e interacciones. Cada servicio está diseñado para proporcionar operaciones CRUD completas para los recursos gestionados. Aquí encontrarás todos los detalles necesarios para integrar y utilizar estos servicios.
+
 host: 'localhost:8000'
-basePath: '/'
+basePath: '/api/v1'
 schemes:
   - http
 
@@ -12,11 +14,12 @@ paths:
   /content:
     get:
       summary: Retrieve all content
+      description: Obtén una lista de todos los elementos de contenido disponibles en la plataforma. Este endpoint permite recuperar todos los contenidos almacenados.
       tags:
         - Content
       responses:
         200:
-          description: A list of all content items
+          description: Una lista de todos los elementos de contenido
           content:
             application/json:
               schema:
@@ -25,6 +28,7 @@ paths:
                   $ref: '#/definitions/Content'
     post:
       summary: Create a new content item
+      description: Crea un nuevo elemento de contenido proporcionando los detalles necesarios en el cuerpo de la solicitud.
       tags:
         - Content
       requestBody:
@@ -35,11 +39,12 @@ paths:
               $ref: '#/definitions/Content'
       responses:
         201:
-          description: Content created
+          description: Contenido creado exitosamente
 
   /content/{id}:
     get:
       summary: Retrieve content by ID
+      description: Obtén los detalles de un elemento de contenido específico usando su ID único.
       tags:
         - Content
       parameters:
@@ -48,18 +53,19 @@ paths:
           schema:
             type: integer
           required: true
-          description: The ID of the content to retrieve
+          description: El ID del contenido a recuperar
       responses:
         200:
-          description: Content retrieved
+          description: Detalles del contenido recuperado
           content:
             application/json:
               schema:
                 $ref: '#/definitions/Content'
         404:
-          description: Content not found
+          description: Contenido no encontrado
     put:
       summary: Update a content item
+      description: Actualiza los detalles de un elemento de contenido existente usando su ID único.
       tags:
         - Content
       parameters:
@@ -68,6 +74,7 @@ paths:
           schema:
             type: integer
           required: true
+          description: El ID del contenido a actualizar
       requestBody:
         required: true
         content:
@@ -76,9 +83,10 @@ paths:
               $ref: '#/definitions/Content'
       responses:
         200:
-          description: Content updated
+          description: Contenido actualizado exitosamente
     delete:
       summary: Delete a content item
+      description: Elimina un elemento de contenido existente usando su ID único.
       tags:
         - Content
       parameters:
@@ -87,18 +95,20 @@ paths:
           schema:
             type: integer
           required: true
+          description: El ID del contenido a eliminar
       responses:
         204:
-          description: Content deleted
+          description: Contenido eliminado exitosamente
 
   /users:
     get:
       summary: Retrieve all users
+      description: Obtén una lista de todos los usuarios registrados en la plataforma.
       tags:
         - User
       responses:
         200:
-          description: A list of all users
+          description: Una lista de todos los usuarios
           content:
             application/json:
               schema:
@@ -107,6 +117,7 @@ paths:
                   $ref: '#/definitions/User'
     post:
       summary: Create a new user
+      description: Crea un nuevo usuario proporcionando los detalles necesarios en el cuerpo de la solicitud.
       tags:
         - User
       requestBody:
@@ -117,11 +128,12 @@ paths:
               $ref: '#/definitions/User'
       responses:
         201:
-          description: User created
+          description: Usuario creado exitosamente
 
   /users/{email}:
     get:
       summary: Retrieve user by email
+      description: Obtén los detalles de un usuario específico usando su correo electrónico único.
       tags:
         - User
       parameters:
@@ -130,18 +142,19 @@ paths:
           schema:
             type: string
           required: true
-          description: The email of the user to retrieve
+          description: El correo electrónico del usuario a recuperar
       responses:
         200:
-          description: User retrieved
+          description: Detalles del usuario recuperado
           content:
             application/json:
               schema:
                 $ref: '#/definitions/User'
         404:
-          description: User not found
+          description: Usuario no encontrado
     put:
       summary: Update a user
+      description: Actualiza los detalles de un usuario existente usando su correo electrónico único.
       tags:
         - User
       parameters:
@@ -150,6 +163,7 @@ paths:
           schema:
             type: string
           required: true
+          description: El correo electrónico del usuario a actualizar
       requestBody:
         required: true
         content:
@@ -158,9 +172,10 @@ paths:
               $ref: '#/definitions/User'
       responses:
         200:
-          description: User updated
+          description: Usuario actualizado exitosamente
     delete:
       summary: Delete a user
+      description: Elimina un usuario existente usando su correo electrónico único.
       tags:
         - User
       parameters:
@@ -169,18 +184,20 @@ paths:
           schema:
             type: string
           required: true
+          description: El correo electrónico del usuario a eliminar
       responses:
         204:
-          description: User deleted
+          description: Usuario eliminado exitosamente
 
   /subscriptions:
     get:
       summary: Retrieve all subscriptions
+      description: Obtén una lista de todas las suscripciones registradas en la plataforma.
       tags:
         - Subscription
       responses:
         200:
-          description: A list of all subscriptions
+          description: Una lista de todas las suscripciones
           content:
             application/json:
               schema:
@@ -189,6 +206,7 @@ paths:
                   $ref: '#/definitions/Subscription'
     post:
       summary: Create a new subscription
+      description: Crea una nueva suscripción proporcionando los detalles necesarios en el cuerpo de la solicitud.
       tags:
         - Subscription
       requestBody:
@@ -199,11 +217,12 @@ paths:
               $ref: '#/definitions/Subscription'
       responses:
         201:
-          description: Subscription created
+          description: Suscripción creada exitosamente
 
   /subscriptions/{id}:
     get:
       summary: Retrieve subscription by ID
+      description: Obtén los detalles de una suscripción específica usando su ID único.
       tags:
         - Subscription
       parameters:
@@ -212,18 +231,19 @@ paths:
           schema:
             type: integer
           required: true
-          description: The ID of the subscription to retrieve
+          description: El ID de la suscripción a recuperar
       responses:
         200:
-          description: Subscription retrieved
+          description: Detalles de la suscripción recuperada
           content:
             application/json:
               schema:
                 $ref: '#/definitions/Subscription'
         404:
-          description: Subscription not found
+          description: Suscripción no encontrada
     put:
       summary: Update a subscription
+      description: Actualiza los detalles de una suscripción existente usando su ID único.
       tags:
         - Subscription
       parameters:
@@ -232,6 +252,7 @@ paths:
           schema:
             type: integer
           required: true
+          description: El ID de la suscripción a actualizar
       requestBody:
         required: true
         content:
@@ -240,9 +261,10 @@ paths:
               $ref: '#/definitions/Subscription'
       responses:
         200:
-          description: Subscription updated
+          description: Suscripción actualizada exitosamente
     delete:
       summary: Delete a subscription
+      description: Elimina una suscripción existente usando su ID único.
       tags:
         - Subscription
       parameters:
@@ -251,9 +273,167 @@ paths:
           schema:
             type: integer
           required: true
+          description: El ID de la suscripción a eliminar
       responses:
         204:
-          description: Subscription deleted
+          description: Suscripción eliminada exitosamente
+
+  /interactions:
+    get:
+      summary: Retrieve all interactions
+      description: Obtén una lista de todas las interacciones registradas en la plataforma.
+      tags:
+        - Interaction
+      responses:
+        200:
+          description: Una lista de todas las interacciones
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/definitions/Interaction'
+    post:
+      summary: Log a new interaction
+      description: Registra una nueva interacción proporcionando los detalles necesarios en el cuerpo de la solicitud.
+      tags:
+        - Interaction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/definitions/Interaction'
+      responses:
+        201:
+          description: Interacción registrada exitosamente
+
+  /interactions/{id}:
+    get:
+      summary: Retrieve interaction by ID
+      description: Obtén los detalles de una interacción específica usando su ID único.
+      tags:
+        - Interaction
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: El ID de la interacción a recuperar
+      responses:
+        200:
+          description: Detalles de la interacción recuperada
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Interaction'
+        404:
+          description: Interacción no encontrada
+    delete:
+      summary: Delete an interaction
+      description: Elimina una interacción existente usando su ID único.
+      tags:
+        - Interaction
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: El ID de la interacción a eliminar
+      responses:
+        204:
+          description: Interacción eliminada exitosamente
+
+  /profiles:
+    get:
+      summary: Retrieve all profiles
+      description: Obtén una lista de todos los perfiles registrados en la plataforma.
+      tags:
+        - Profile
+      responses:
+        200:
+          description: Una lista de todos los perfiles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/definitions/Profile'
+    post:
+      summary: Create a new profile
+      description: Crea un nuevo perfil proporcionando los detalles necesarios en el cuerpo de la solicitud.
+      tags:
+        - Profile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/definitions/Profile'
+      responses:
+        201:
+          description: Perfil creado exitosamente
+
+  /profiles/{id}:
+    get:
+      summary: Retrieve profile by ID
+      description: Obtén los detalles de un perfil específico usando su ID único.
+      tags:
+        - Profile
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: El ID del perfil a recuperar
+      responses:
+        200:
+          description: Detalles del perfil recuperado
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Profile'
+        404:
+          description: Perfil no encontrado
+    put:
+      summary: Update a profile
+      description: Actualiza los detalles de un perfil existente usando su ID único.
+      tags:
+        - Profile
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: El ID del perfil a actualizar
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/definitions/Profile'
+      responses:
+        200:
+          description: Perfil actualizado exitosamente
+    delete:
+      summary: Delete a profile
+      description: Elimina un perfil existente usando su ID único.
+      tags:
+        - Profile
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: El ID del perfil a eliminar
+      responses:
+        204:
+          description: Perfil eliminado exitosamente
 
 definitions:
   Content:
