@@ -1,0 +1,505 @@
+swagger: '2.0'
+info:
+  title: Multi-Service API Documentation
+  version: 1.0.0
+  description: API documentation for multiple microservices including User, Content, and other services.
+
+host: 'localhost:8000'
+basePath: '/'
+schemes:
+  - http
+
+paths:
+  /content:
+    get:
+      summary: Retrieve all content
+      tags:
+        - Content
+      responses:
+        200:
+          description: A list of all content items
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/definitions/Content'
+    post:
+      summary: Create a new content item
+      tags:
+        - Content
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/definitions/Content'
+      responses:
+        201:
+          description: Content created
+
+  /content/{id}:
+    get:
+      summary: Retrieve content by ID
+      tags:
+        - Content
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: The ID of the content to retrieve
+      responses:
+        200:
+          description: Content retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Content'
+        404:
+          description: Content not found
+    put:
+      summary: Update a content item
+      tags:
+        - Content
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/definitions/Content'
+      responses:
+        200:
+          description: Content updated
+    delete:
+      summary: Delete a content item
+      tags:
+        - Content
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        204:
+          description: Content deleted
+
+definitions:
+  Content:
+    type: object
+    required:
+      - title
+      - type
+    properties:
+      title:
+        type: string
+      description:
+        type: string
+      release_date:
+        type: string
+        format: date-time
+      type:
+        type: string
+      url_content:
+        type: string
+      url_cover:
+        type: string
+  /users:
+    get:
+      summary: Retrieve all users
+      tags:
+        - User
+      responses:
+        200:
+          description: A list of all users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/definitions/User'
+
+    post:
+      summary: Create a new user
+      tags:
+        - User
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/definitions/User'
+      responses:
+        201:
+          description: User created
+
+  /users/{email}:
+    get:
+      summary: Retrieve user by email
+      tags:
+        - User
+      parameters:
+        - in: path
+          name: email
+          schema:
+            type: string
+          required: true
+          description: The email of the user to retrieve
+      responses:
+        200:
+          description: User retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/User'
+        404:
+          description: User not found
+    put:
+      summary: Update a user
+      tags:
+        - User
+      parameters:
+        - in: path
+          name: email
+          schema:
+            type: string
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/definitions/User'
+      responses:
+        200:
+          description: User updated
+    delete:
+      summary: Delete a user
+      tags:
+        - User
+      parameters:
+        - in: path
+          name: email
+          schema:
+            type: string
+          required: true
+      responses:
+        204:
+          description: User deleted
+
+definitions:
+  User:
+    type: object
+    required:
+      - username
+      - email
+    properties:
+      id:
+        type: integer
+      username:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+      created_at:
+        type: string
+        format: date-time
+  /subscriptions:
+    get:
+      summary: Retrieve all subscriptions
+      tags:
+        - Subscription
+      responses:
+        200:
+          description: A list of all subscriptions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/definitions/Subscription'
+
+    post:
+      summary: Create a new subscription
+      tags:
+        - Subscription
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/definitions/Subscription'
+      responses:
+        201:
+          description: Subscription created
+
+  /subscriptions/{id}:
+    get:
+      summary: Retrieve subscription by ID
+      tags:
+        - Subscription
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: The ID of the subscription to retrieve
+      responses:
+        200:
+          description: Subscription retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Subscription'
+        404:
+          description: Subscription not found
+    put:
+      summary: Update a subscription
+      tags:
+        - Subscription
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/definitions/Subscription'
+      responses:
+        200:
+          description: Subscription updated
+    delete:
+      summary: Delete a subscription
+      tags:
+        - Subscription
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        204:
+          description: Subscription deleted
+
+definitions:
+  Subscription:
+    type: object
+    required:
+      - subscriber_id
+      - subscribed_to_id
+    properties:
+      id:
+        type: integer
+      subscriber_id:
+        type: integer
+      subscribed_to_id:
+        type: integer
+      start_date:
+        type: string
+        format: date-time
+      end_date:
+        type: string
+        format: date-time
+      status:
+        type: string
+  /interactions:
+    get:
+      summary: Retrieve all interactions
+      tags:
+        - Interaction
+      responses:
+        200:
+          description: A list of all interactions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/definitions/Interaction'
+
+    post:
+      summary: Log a new interaction
+      tags:
+        - Interaction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/definitions/Interaction'
+      responses:
+        201:
+          description: Interaction logged
+
+  /interactions/{id}:
+    get:
+      summary: Retrieve interaction by ID
+      tags:
+        - Interaction
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: The ID of the interaction to retrieve
+      responses:
+        200:
+          description: Interaction retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Interaction'
+        404:
+          description: Interaction not found
+    delete:
+      summary: Delete an interaction
+      tags:
+        - Interaction
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        204:
+          description: Interaction deleted
+
+definitions:
+  Interaction:
+    type: object
+    required:
+      - user_id
+      - content_id
+    properties:
+      id:
+        type: integer
+      user_id:
+        type: integer
+      content_id:
+        type: integer
+      type:
+        type: string
+      timestamp:
+        type: string
+        format: date-time
+  /profiles:
+    get:
+      summary: Retrieve all profiles
+      tags:
+        - Profile
+      responses:
+        200:
+          description: A list of all profiles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/definitions/Profile'
+
+    post:
+      summary: Create a new profile
+      tags:
+        - Profile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/definitions/Profile'
+      responses:
+        201:
+          description: Profile created
+
+  /profiles/{id}:
+    get:
+      summary: Retrieve profile by ID
+      tags:
+        - Profile
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: The ID of the profile to retrieve
+      responses:
+        200:
+          description: Profile retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Profile'
+        404:
+          description: Profile not found
+    put:
+      summary: Update a profile
+      tags:
+        - Profile
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/definitions/Profile'
+      responses:
+        200:
+          description: Profile updated
+    delete:
+      summary: Delete a profile
+      tags:
+        - Profile
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        204:
+          description: Profile deleted
+
+definitions:
+  Profile:
+    type: object
+    required:
+      - user_id
+      - biography
+    properties:
+      id:
+        type: integer
+      user_id:
+        type: integer
+      biography:
+        type: string
+      interests:
+        type: array
+        items:
+          type: string
+      experience:
+        type: string
+      education:
+        type: string
