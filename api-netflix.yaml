@@ -1,12 +1,10 @@
 swagger: '2.0'
 info:
-  title: Multi-Service API Documentation
-  version: 1.0.0
-  description: >
-    Bienvenido a la documentación de la API Multi-Service. Esta API incluye varios microservicios que gestionan diferentes aspectos de nuestra plataforma, incluyendo usuarios, perfiles, contenido, suscripciones e interacciones. Cada servicio está diseñado para proporcionar operaciones CRUD completas para los recursos gestionados. Aquí encontrarás todos los detalles necesarios para integrar y utilizar estos servicios.
-
-host: 'localhost:8000'
-basePath: '/api/v1'
+  title: Netflix API
+  description: API for managing Netflix content.
+  version: "1.0.0"
+host: localhost:8080
+basePath: /
 schemes:
   - http
 
@@ -14,26 +12,41 @@ paths:
   /content:
     get:
       summary: Retrieve all content
-      description: Obtén una lista de todos los elementos de contenido disponibles en la plataforma. Este endpoint permite recuperar todos los contenidos almacenados.
+      description: Obtén una lista de todos los elementos de contenido disponibles en la plataforma.
       tags:
         - Content
       responses:
-        200:
+        '200':
           description: Una lista de todos los elementos de contenido
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/definitions/Content'
-              example:
-                - id: 1
-                  title: "Contenido de ejemplo"
-                  description: "Descripción del contenido de ejemplo"
-                  release_date: "2024-05-19T12:00:00Z"
-                  type: "video"
-                  url_content: "http://example.com/content/1"
-                  url_cover: "http://example.com/cover/1"
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    title:
+                      type: string
+                      example: "Contenido de ejemplo"
+                    description:
+                      type: string
+                      example: "Descripción del contenido de ejemplo"
+                    release_date:
+                      type: string
+                      format: date-time
+                      example: "2024-05-19T12:00:00Z"
+                    type:
+                      type: string
+                      example: "video"
+                    url_content:
+                      type: string
+                      example: "http://example.com/content/1"
+                    url_cover:
+                      type: string
+                      example: "http://example.com/cover/1"
     post:
       summary: Create a new content item
       description: Crea un nuevo elemento de contenido proporcionando los detalles necesarios en el cuerpo de la solicitud.
@@ -46,20 +59,20 @@ paths:
             schema:
               $ref: '#/definitions/Content'
       responses:
-        201:
+        '201':
           description: Contenido creado exitosamente
           content:
             application/json:
               schema:
                 $ref: '#/definitions/Content'
               example:
-                id: 1
-                title: "Nuevo contenido"
-                description: "Descripción del nuevo contenido"
-                release_date: "2024-05-19T12:00:00Z"
+                id: 2
+                title: "Nuevo contenido de ejemplo"
+                description: "Descripción del nuevo contenido de ejemplo"
+                release_date: "2024-06-20T12:00:00Z"
                 type: "video"
-                url_content: "http://example.com/content/1"
-                url_cover: "http://example.com/cover/1"
+                url_content: "http://example.com/content/2"
+                url_cover: "http://example.com/cover/2"
 
   /content/{id}:
     get:
@@ -75,7 +88,7 @@ paths:
           required: true
           description: El ID del contenido a recuperar
       responses:
-        200:
+        '200':
           description: Detalles del contenido recuperado
           content:
             application/json:
@@ -89,7 +102,7 @@ paths:
                 type: "video"
                 url_content: "http://example.com/content/1"
                 url_cover: "http://example.com/cover/1"
-        404:
+        '404':
           description: Contenido no encontrado
     put:
       summary: Update a content item
@@ -110,7 +123,7 @@ paths:
             schema:
               $ref: '#/definitions/Content'
       responses:
-        200:
+        '200':
           description: Contenido actualizado exitosamente
           content:
             application/json:
@@ -137,7 +150,7 @@ paths:
           required: true
           description: El ID del contenido a eliminar
       responses:
-        204:
+        '204':
           description: Contenido eliminado exitosamente
 
   /users:
@@ -147,19 +160,28 @@ paths:
       tags:
         - User
       responses:
-        200:
+        '200':
           description: Una lista de todos los usuarios
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/definitions/User'
-              example:
-                - id: 1
-                  username: "usuario1"
-                  email: "usuario1@example.com"
-                  created_at: "2024-05-19T12:00:00Z"
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    username:
+                      type: string
+                      example: "usuario1"
+                    email:
+                      type: string
+                      example: "usuario1@example.com"
+                    created_at:
+                      type: string
+                      format: date-time
+                      example: "2024-05-19T12:00:00Z"
     post:
       summary: Create a new user
       description: Crea un nuevo usuario proporcionando los detalles necesarios en el cuerpo de la solicitud.
@@ -172,7 +194,7 @@ paths:
             schema:
               $ref: '#/definitions/User'
       responses:
-        201:
+        '201':
           description: Usuario creado exitosamente
           content:
             application/json:
@@ -198,7 +220,7 @@ paths:
           required: true
           description: El correo electrónico del usuario a recuperar
       responses:
-        200:
+        '200':
           description: Detalles del usuario recuperado
           content:
             application/json:
@@ -209,7 +231,7 @@ paths:
                 username: "usuario1"
                 email: "usuario1@example.com"
                 created_at: "2024-05-19T12:00:00Z"
-        404:
+        '404':
           description: Usuario no encontrado
     put:
       summary: Update a user
@@ -230,7 +252,7 @@ paths:
             schema:
               $ref: '#/definitions/User'
       responses:
-        200:
+        '200':
           description: Usuario actualizado exitosamente
           content:
             application/json:
@@ -254,7 +276,7 @@ paths:
           required: true
           description: El correo electrónico del usuario a eliminar
       responses:
-        204:
+        '204':
           description: Usuario eliminado exitosamente
 
   /subscriptions:
@@ -264,21 +286,35 @@ paths:
       tags:
         - Subscription
       responses:
-        200:
+        '200':
           description: Una lista de todas las suscripciones
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/definitions/Subscription'
-              example:
-                - id: 1
-                  subscriber_id: 1
-                  subscribed_to_id: 2
-                  start_date: "2024-05-19T12:00:00Z"
-                  end_date: "2025-05-19T12:00:00Z"
-                  status: "active"
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    subscriber_id:
+                      type: integer
+                      example: 1
+                    subscribed_to_id:
+                      type: integer
+                      example: 2
+                    start_date:
+                      type: string
+                      format: date-time
+                      example: "2024-05-19T12:00:00Z"
+                    end_date:
+                      type: string
+                      format: date-time
+                      example: "2025-05-19T12:00:00Z"
+                    status:
+                      type: string
+                      example: "active"
     post:
       summary: Create a new subscription
       description: Crea una nueva suscripción proporcionando los detalles necesarios en el cuerpo de la solicitud.
@@ -291,7 +327,7 @@ paths:
             schema:
               $ref: '#/definitions/Subscription'
       responses:
-        201:
+        '201':
           description: Suscripción creada exitosamente
           content:
             application/json:
@@ -319,7 +355,7 @@ paths:
           required: true
           description: El ID de la suscripción a recuperar
       responses:
-        200:
+        '200':
           description: Detalles de la suscripción recuperada
           content:
             application/json:
@@ -332,7 +368,7 @@ paths:
                 start_date: "2024-05-19T12:00:00Z"
                 end_date: "2025-05-19T12:00:00Z"
                 status: "active"
-        404:
+        '404':
           description: Suscripción no encontrada
     put:
       summary: Update a subscription
@@ -353,7 +389,7 @@ paths:
             schema:
               $ref: '#/definitions/Subscription'
       responses:
-        200:
+        '200':
           description: Suscripción actualizada exitosamente
           content:
             application/json:
@@ -379,7 +415,7 @@ paths:
           required: true
           description: El ID de la suscripción a eliminar
       responses:
-        204:
+        '204':
           description: Suscripción eliminada exitosamente
 
   /interactions:
@@ -389,20 +425,31 @@ paths:
       tags:
         - Interaction
       responses:
-        200:
+        '200':
           description: Una lista de todas las interacciones
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/definitions/Interaction'
-              example:
-                - id: 1
-                  user_id: 1
-                  content_id: 1
-                  type: "view"
-                  timestamp: "2024-05-19T12:00:00Z"
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    user_id:
+                      type: integer
+                      example: 1
+                    content_id:
+                      type: integer
+                      example: 1
+                    type:
+                      type: string
+                      example: "view"
+                    timestamp:
+                      type: string
+                      format: date-time
+                      example: "2024-05-19T12:00:00Z"
     post:
       summary: Log a new interaction
       description: Registra una nueva interacción proporcionando los detalles necesarios en el cuerpo de la solicitud.
@@ -415,7 +462,7 @@ paths:
             schema:
               $ref: '#/definitions/Interaction'
       responses:
-        201:
+        '201':
           description: Interacción registrada exitosamente
           content:
             application/json:
@@ -442,7 +489,7 @@ paths:
           required: true
           description: El ID de la interacción a recuperar
       responses:
-        200:
+        '200':
           description: Detalles de la interacción recuperada
           content:
             application/json:
@@ -454,7 +501,7 @@ paths:
                 content_id: 1
                 type: "view"
                 timestamp: "2024-05-19T12:00:00Z"
-        404:
+        '404':
           description: Interacción no encontrada
     delete:
       summary: Delete an interaction
@@ -469,7 +516,7 @@ paths:
           required: true
           description: El ID de la interacción a eliminar
       responses:
-        204:
+        '204':
           description: Interacción eliminada exitosamente
 
   /profiles:
@@ -479,21 +526,35 @@ paths:
       tags:
         - Profile
       responses:
-        200:
+        '200':
           description: Una lista de todos los perfiles
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/definitions/Profile'
-              example:
-                - id: 1
-                  user_id: 1
-                  biography: "Biografía de ejemplo"
-                  interests: ["películas", "música"]
-                  experience: "Experiencia de ejemplo"
-                  education: "Educación de ejemplo"
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    user_id:
+                      type: integer
+                      example: 1
+                    biography:
+                      type: string
+                      example: "Biografía de ejemplo"
+                    interests:
+                      type: array
+                      items:
+                        type: string
+                      example: ["películas", "música"]
+                    experience:
+                      type: string
+                      example: "Experiencia de ejemplo"
+                    education:
+                      type: string
+                      example: "Educación de ejemplo"
     post:
       summary: Create a new profile
       description: Crea un nuevo perfil proporcionando los detalles necesarios en el cuerpo de la solicitud.
@@ -506,7 +567,7 @@ paths:
             schema:
               $ref: '#/definitions/Profile'
       responses:
-        201:
+        '201':
           description: Perfil creado exitosamente
           content:
             application/json:
@@ -534,7 +595,7 @@ paths:
           required: true
           description: El ID del perfil a recuperar
       responses:
-        200:
+        '200':
           description: Detalles del perfil recuperado
           content:
             application/json:
@@ -547,7 +608,7 @@ paths:
                 interests: ["películas", "música"]
                 experience: "Experiencia de ejemplo"
                 education: "Educación de ejemplo"
-        404:
+        '404':
           description: Perfil no encontrado
     put:
       summary: Update a profile
@@ -568,7 +629,7 @@ paths:
             schema:
               $ref: '#/definitions/Profile'
       responses:
-        200:
+        '200':
           description: Perfil actualizado exitosamente
           content:
             application/json:
@@ -594,7 +655,7 @@ paths:
           required: true
           description: El ID del perfil a eliminar
       responses:
-        204:
+        '204':
           description: Perfil eliminado exitosamente
 
 definitions:
@@ -602,10 +663,15 @@ definitions:
     type: object
     required:
       - title
+      - description
+      - release_date
       - type
+      - url_content
+      - url_cover
     properties:
       id:
         type: integer
+        format: int64
       title:
         type: string
       description:
@@ -616,84 +682,4 @@ definitions:
       type:
         type: string
       url_content:
-        type: string
-      url_cover:
-        type: string
-
-  User:
-    type: object
-    required:
-      - username
-      - email
-    properties:
-      id:
-        type: integer
-      username:
-        type: string
-      email:
-        type: string
-      password:
-        type: string
-      created_at:
-        type: string
-        format: date-time
-
-  Subscription:
-    type: object
-    required:
-      - subscriber_id
-      - subscribed_to_id
-    properties:
-      id:
-        type: integer
-      subscriber_id:
-        type: integer
-      subscribed_to_id:
-        type: integer
-      start_date:
-        type: string
-        format: date-time
-      end_date:
-        type: string
-        format: date-time
-      status:
-        type: string
-
-  Interaction:
-    type: object
-    required:
-      - user_id
-      - content_id
-    properties:
-      id:
-        type: integer
-      user_id:
-        type: integer
-      content_id:
-        type: integer
-      type:
-        type: string
-      timestamp:
-        type: string
-        format: date-time
-
-  Profile:
-    type: object
-    required:
-      - user_id
-      - biography
-    properties:
-      id:
-        type: integer
-      user_id:
-        type: integer
-      biography:
-        type: string
-      interests:
-        type: array
-        items:
-          type: string
-      experience:
-        type: string
-      education:
         type: string
